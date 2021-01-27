@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="/css/app.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{title}}">
+  {{#if username}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@{{username}}">
+  <meta name="twitter:creator" content="@MrPanme">
+  <meta name="twitter:title" content="My Best Friends on Twitter">
+  <meta name="twitter:image" content="{{fullImageUrl}}">
+  <meta name="og:image" content="{{fullImageUrl}}">
+  {{/if}}
+  <title>{{title}}</title>
+  {{#if user}}
+  <script>
+    window.user = {
+      name: '{{user.name}}',
+      username: '{{user.username}}',
+      avatar: '{{user.avatar}}'
+    };
+    window.url = window.location.protocol + "//" + window.location.host
+  </script>
+  {{/if}}
+  <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    h2,
+    ol,
+    p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body class="bg-primary-500 min-h-screen">
+  <div id="app" class="hidden flex items-center justify-center p-5 md:p-10 h-full">
+    <div class="container w-full sm:w-8/12 md:w-7/12 lg:w-5/12 xl:w-4/12 h-full relative">
+      {{{body}}}
+      <img src="/img/cats/catonsofa.svg" class="mt-8 mb-2 h-32 mx-auto" />
+      <div class="flex items-center justify-center text-gray-700">
+        <a href="/privacy" class="mx-2 md:mx-3">Privacy</a>
+        <a href="/cookie" class="mx-2 md:mx-3">Cookie</a>
+        <a href="/about" class="mx-2 md:mx-3">About</a>
+      </div>
+    </div>
+  </div>
+  <script src="/js/alpine.min.js"></script>
+  <script>
+    window.onload = function() {
+      document.getElementById('app').classList.remove('hidden');
+    }
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K27EXJQ19S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-K27EXJQ19S');
+  </script>
+</body>
+</html>

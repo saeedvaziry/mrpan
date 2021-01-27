@@ -1,0 +1,72 @@
+<div x-data="{
+  user: window.user,
+  loading: false,
+  background: '2cb4f1',
+  saving: false,
+  dropdown: false
+}">
+  <div class="w-full flex items-center justify-between text-center text-white tracking-wide mb-5 font-bold">
+    <div class="text-2xl">Mr. Pan</div>
+    <div>
+      <div @click="dropdown = !dropdown" class="z-0 cursor-pointer">
+        <template x-if="user.avatar">
+          <img class="w-12 h-12 rounded-full border-2 border-primary-100" :src="user.avatar" alt="" />
+        </template>
+        <template x-if="!user.avatar">
+          <div class="w-12 h-12 text-sm md:text-md rounded-full inline-flex items-center justify-center bg-primary-200 text-primary-600 border-4 border-primary-100 capitalize">
+            <span x-text="user.name.charAt(0)"></span>
+          </div>
+        </template>
+      </div>
+      <div class="relative">
+        <transition enter-active-class="transition ease-out duration-100 transform" enter-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100" leave-active-class="transition ease-in duration-75 transform" leave-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
+          <div x-show="dropdown" @click.away="dropdown = false" class="origin-top-right right-0 absolute mt-2 w-48 min-w-full rounded-md shadow-lg z-10">
+            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="dropdown">
+              <div @click="logout()" :class="['block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer']" role="menuitem">
+                logout
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 md:mb-5 relative">
+    <div x-show="loading" class="absolute left-0 right-0 top-0 bottom-0 z-50 flex items-center justify-center h-full" style="background: #00000052;">
+      <div class="text-2xl text-white">Please wait...</div>
+    </div>
+    <img id="image" :src="`/${user.username}/circle.png?bg=${background}`" @load="loading = false" />
+  </div>
+  <div class="mb-10">
+    <p class="mb-3 text-white">Edit background color</p>
+    <div class="flex items-center">
+      <a href="javascript:" class="w-6 h-6 rounded-full" :class="{'border-2 border-white': background === '2cb4f1'}" style="background-color: #2cb4f1" @click="background = '2cb4f1'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '111111'}" style="background-color: #111111" @click="background = '111111'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'f9858b'}" style="background-color: #f9858b" @click="background = 'f9858b'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '64d52d'}" style="background-color: #64d52d" @click="background = '64d52d'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'ac85f9'}" style="background-color: #ac85f9" @click="background = 'ac85f9'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'ffdd00'}" style="background-color: #ffdd00" @click="background = 'ffdd00'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'c83c4f'}" style="background-color: #c83c4f" @click="background = 'c83c4f'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '606468'}" style="background-color: #606468" @click="background = '606468'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+    </div>
+  </div>
+  <a id="save-image" @click="saving = true; setTimeout(() => {saving = false;}, 5000)" :href="`/${user.username}/circle.png?bg=${background}`" download class="w-72 h-12 bg-white mx-auto rounded-2xl flex items-center px-4 text-black cursor-pointer mb-5">
+    <div class="w-full text-center font-bold">
+      <span x-show="saving">Please wait...</span>
+      <span x-show="!saving">Save image</span>
+    </div>
+  </a>
+  <a :href="`http://twitter.com/share?text=My Best Friends on Twitter&url=${url}/${user.username}?bg=${background}&hashtags=MrPan2021`" target="_blank" class="w-72 h-12 bg-primary-600 mx-auto rounded-2xl flex items-center px-4 cursor-pointer text-white">
+    <fa-icon :icon="['fab', 'twitter']" class="text-xl absolute"></fa-icon>
+    <div class="w-full text-center font-bold">Share on Twitter</div>
+  </a>
+</div>
+<script>
+  function changeColor(color) {
+    this.background = color;
+    this.loading = true;
+  }
+  function logout() {
+    window.location.href = '/auth/logout';
+  }
+</script>

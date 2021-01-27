@@ -10,7 +10,7 @@ export class AppController {
       return res.redirect('/home');
     }
     res.render('index', {
-      title: process.env.APP_NAME
+      title: process.env.APP_NAME,
     });
   }
 
@@ -20,7 +20,7 @@ export class AppController {
   home(@Req() req: Request) {
     return {
       title: process.env.APP_NAME,
-      user: req.user
+      user: req.user,
     };
   }
 
@@ -29,7 +29,7 @@ export class AppController {
   privacy(@Req() req: Request) {
     return {
       title: process.env.APP_NAME,
-      user: req.user
+      user: req.user,
     };
   }
 
@@ -38,7 +38,7 @@ export class AppController {
   contact(@Req() req: Request) {
     return {
       title: process.env.APP_NAME,
-      user: req.user
+      user: req.user,
     };
   }
 
@@ -47,7 +47,7 @@ export class AppController {
   cookie(@Req() req: Request) {
     return {
       title: process.env.APP_NAME,
-      user: req.user
+      user: req.user,
     };
   }
 }

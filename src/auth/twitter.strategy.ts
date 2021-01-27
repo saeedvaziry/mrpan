@@ -10,12 +10,16 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
       consumerKey: process.env.TWITTER_CLIENT_ID,
       consumerSecret: process.env.TWITTER_CLIENT_SECRET,
       callbackURL: `${process.env.APP_URL}/auth/twitter/callback`,
-      includeEmail: true
+      includeEmail: true,
     });
   }
 
   async validate(token: string, tokenSecret: string, profile: any, cb) {
-    const user = await this.authService.validateTwitter(token, tokenSecret, profile);
+    const user = await this.authService.validateTwitter(
+      token,
+      tokenSecret,
+      profile,
+    );
     return cb(null, user.id);
   }
 }

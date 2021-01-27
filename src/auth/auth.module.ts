@@ -10,11 +10,11 @@ import { UsersModule } from 'src/users/users.module';
   imports: [
     PassportModule.register({
       defaultStrategy: 'twitter',
-      session: true
+      session: true,
     }),
-    UsersModule
+    UsersModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, TwitterStrategy, TwitterSerializer]
+  providers: [AuthService, TwitterStrategy, TwitterSerializer],
 })
 export class AuthModule {}

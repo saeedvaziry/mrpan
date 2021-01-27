@@ -26,14 +26,17 @@ export class TwitterService {
       consumer_key: process.env.TWITTER_CLIENT_ID,
       consumer_secret: process.env.TWITTER_CLIENT_SECRET,
       access_token_key: user.token,
-      access_token_secret: user.tokenSecret
+      access_token_secret: user.tokenSecret,
     });
   }
 
   async calculateMentions(user) {
-    let statuses = await this.getClient(user).get('statuses/mentions_timeline', {
-      count: 100
-    });
+    let statuses = await this.getClient(user).get(
+      'statuses/mentions_timeline',
+      {
+        count: 100,
+      },
+    );
 
     return new Promise(function (resolve) {
       statuses.map((item) => {
@@ -45,7 +48,7 @@ export class TwitterService {
             name: user.name,
             username: user.screen_name,
             avatar: user.profile_image_url_https.replace('normal', '400x400'),
-            score: 0.5
+            score: 0.5,
           };
         }
       });
@@ -55,7 +58,7 @@ export class TwitterService {
 
   async calculateFavorites(user) {
     let statuses = await this.getClient(user).get('favorites/list', {
-      count: 100
+      count: 100,
     });
 
     return new Promise(function (resolve) {
@@ -68,7 +71,7 @@ export class TwitterService {
             name: user.name,
             username: user.screen_name,
             avatar: user.profile_image_url_https.replace('normal', '400x400'),
-            score: 1
+            score: 1,
           };
         }
       });

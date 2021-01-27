@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
-const { createCanvas, loadImage, registerFont } = require("canvas");
+const { createCanvas, loadImage, registerFont } = require('canvas');
 const fs = require('fs');
 const glob = require('glob');
 const toRad = (x) => x * (Math.PI / 180);
 
 @Injectable()
 export class CircleService {
-  async render(config, bg = "#00b4f7", username: string) {
-
+  async render(config, bg = '#00b4f7', username: string) {
     const width = 1200;
     const height = 1000;
 
     const canvas = createCanvas(width, height);
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     const drawingStartPosition = {
       x: width / 2,
       y: (height + 100) / 2,
@@ -27,7 +26,6 @@ export class CircleService {
       const angleSize = 360 / count;
       // loop over each circle of the layer
       for (let i = 0; i < count; i++) {
-
         // i * angleSize is the angle at which our circle goes
         // We need to converting to radiant to work with the cos/sin
         const circleAngle = i * angleSize;
@@ -49,12 +47,12 @@ export class CircleService {
         // if we are trying to render a circle but we ran out of users, just exit the loop. We are done.
         if (!users[i]) break;
 
-
         ctx.beginPath();
         ctx.arc(circleX, circleY, radius, 0, 2 * Math.PI);
         ctx.clip();
 
-        const defaultAvatarUrl = "https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png";
+        const defaultAvatarUrl =
+          'https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png';
         const avatarUrl = users[i].avatar || defaultAvatarUrl;
 
         const img = await loadImage(avatarUrl);
@@ -63,7 +61,7 @@ export class CircleService {
           circleX - radius,
           circleY - radius,
           radius * 2,
-          radius * 2
+          radius * 2,
         );
         ctx.restore();
 
@@ -75,61 +73,80 @@ export class CircleService {
         // if circleAngle === 90 : Text must be in bottom
         // if circleAngle === 270 : Text must be in top
         const fontSize = 20;
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#fff";
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#fff';
         let textX, textY;
 
-        registerFont(__dirname + '/../../public/fonts/normal.ttf', { family: 'yahei', weight: 'normal' });
+        registerFont(__dirname + '/../../public/fonts/normal.ttf', {
+          family: 'yahei',
+          weight: 'normal',
+        });
         ctx.font = `normal ${fontSize - 3}px yahei`;
         let usernameWidth = ctx.measureText(users[i].username).width;
 
-        registerFont(__dirname + '/../../public/fonts/msyhbd.ttf', { family: 'yahei', weight: 'bold' });
+        registerFont(__dirname + '/../../public/fonts/msyhbd.ttf', {
+          family: 'yahei',
+          weight: 'bold',
+        });
         ctx.font = `bold ${fontSize}px yahei`;
         let nameWidth = ctx.measureText(users[i].name).width;
 
         let textWidth = Math.max(nameWidth, usernameWidth);
         if (circleAngle === 90) {
           [textX, textY] = [circleX, circleY + radius + 45];
-        }
-        else if (circleAngle === 270) {
+        } else if (circleAngle === 270) {
           [textX, textY] = [circleX, circleY - radius - 25];
-        }
-        else if (circleAngle < 90 || circleAngle > 270) {
+        } else if (circleAngle < 90 || circleAngle > 270) {
           [textX, textY] = [circleX + radius + textWidth / 2 + 10, circleY];
-        }
-        else {
+        } else {
           [textX, textY] = [circleX - radius - textWidth / 2 - 10, circleY];
         }
         ctx.fillText(users[i].name, textX, textY - 12);
-        registerFont(__dirname + '/../../public/fonts/normal.ttf', { family: 'yahei', weight: 'normal' });
+        registerFont(__dirname + '/../../public/fonts/normal.ttf', {
+          family: 'yahei',
+          weight: 'normal',
+        });
         ctx.font = `normal ${fontSize - 3}px yahei`;
         ctx.fillText('@' + users[i].username, textX, textY + 12);
       }
       ctx.font = `bold 45px yahei`;
-      ctx.textAlign = "center";
+      ctx.textAlign = 'center';
       ctx.fillText('MY BEST FRIENDS ON', width / 2 - 30, 100);
 
-      const twitterLogo = await loadImage(__dirname + '/../../public/img/twitter.png');
+      const twitterLogo = await loadImage(
+        __dirname + '/../../public/img/twitter.png',
+      );
       ctx.drawImage(
         twitterLogo,
         width / 2 + ctx.measureText('MY BEST FRIENDS ON').width / 2 - 12,
-        45, 70, 70
+        45,
+        70,
+        70,
       );
 
       ctx.font = `bold 20px yahei`;
-      ctx.textAlign = "left";
+      ctx.textAlign = 'left';
       ctx.fillText('MrPan.me', 30, height - 30);
     }
 
     // write the resulting canvas to file
-    glob(__dirname + '/../../circles/' + username + "-*.png", async (err, files) => {
-      for (let i = 0; i < files.length; i++) {
-        fs.unlinkSync(files[i]);
-      }
-      const out = fs.createWriteStream(__dirname + '/../../circles/' + username + `-${bg.replace('#', '')}` + '.png');
-      const stream = canvas.createPNGStream();
-      stream.pipe(out);
-    });
+    glob(
+      __dirname + '/../../circles/' + username + '-*.png',
+      async (err, files) => {
+        for (let i = 0; i < files.length; i++) {
+          fs.unlinkSync(files[i]);
+        }
+        const out = fs.createWriteStream(
+          __dirname +
+            '/../../circles/' +
+            username +
+            `-${bg.replace('#', '')}` +
+            '.png',
+        );
+        const stream = canvas.createPNGStream();
+        stream.pipe(out);
+      },
+    );
 
     return canvas.createPNGStream();
   }

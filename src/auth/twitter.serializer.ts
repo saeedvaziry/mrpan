@@ -1,12 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { PassportSerializer } from "@nestjs/passport";
-import { UsersService } from "src/users/users.service";
+import { Injectable } from '@nestjs/common';
+import { PassportSerializer } from '@nestjs/passport';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class TwitterSerializer extends PassportSerializer {
-  constructor(
-    private readonly usersService: UsersService,
-  ) {
+  constructor(private readonly usersService: UsersService) {
     super();
   }
 
@@ -15,8 +13,9 @@ export class TwitterSerializer extends PassportSerializer {
   }
 
   async deserializeUser(userId: string, done: CallableFunction) {
-    return this.usersService.findOneById(Number(userId))
-      .then(user => done(null, user))
-      .catch(error => done(error));
+    return this.usersService
+      .findOneById(Number(userId))
+      .then((user) => done(null, user))
+      .catch((error) => done(error));
   }
 }

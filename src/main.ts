@@ -12,12 +12,9 @@ import { NotFoundExceptionFilter } from './common/filters/not-found-exception.fi
 const MySQLStore = mysqlStore(session);
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-    {
-      logger: process.env.APP_ENV === 'production' ? ['error'] : true
-    }
-  );
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: process.env.APP_ENV === 'production' ? ['error'] : true,
+  });
 
   app.useGlobalFilters(new NotFoundExceptionFilter());
 
@@ -27,7 +24,7 @@ async function bootstrap() {
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
-        database: process.env.DB_NAME
+        database: process.env.DB_NAME,
       }),
       secret: process.env.APP_SECRET,
       resave: false,
@@ -45,7 +42,7 @@ async function bootstrap() {
 
   app.enable('trust proxy');
   app.use((req, res, next) => {
-    if (!req.secure && process.env.APP_ENV === "production") {
+    if (!req.secure && process.env.APP_ENV === 'production') {
       return res.redirect('https://' + req.get('host') + req.url);
     }
     next();

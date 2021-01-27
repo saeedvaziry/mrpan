@@ -14,8 +14,8 @@ import { TwitterModule } from './twitter/twitter.module';
     AuthModule,
     UsersModule,
     CircleModule,
-    TwitterModule
+    TwitterModule,
   ],
-  controllers: [AppController]
+  controllers: [AppController],
 })
 export class AppModule {}

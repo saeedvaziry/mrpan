@@ -3,6 +3,6 @@ import { TwitterService } from './twitter.service';
 
 @Module({
   providers: [TwitterService],
-  exports: [TwitterService]
+  exports: [TwitterService],
 })
 export class TwitterModule {}

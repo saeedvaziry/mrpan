@@ -37,7 +37,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.usersRepository.preload({
       id: id,
-      ...updateUserDto
+      ...updateUserDto,
     });
     if (!user) {
       throw new NotFoundException('User not found!');

@@ -31,9 +31,9 @@
       </div>
     </div>
   </div>
-  <div class="mb-3 md:mb-5 relative">
-    <div x-show="loading" class="absolute left-0 right-0 top-0 bottom-0 z-50 flex items-center justify-center h-full" style="background: #00000052;">
-      <div class="text-2xl text-white">Please wait...</div>
+  <div class="mb-3 md:mb-5 relative" style="height: 506px">
+    <div x-show="loading" class="absolute left-0 right-0 top-0 bottom-0 z-50 flex items-center justify-center h-full">
+      <img src="./img/loading.svg" class="text-2xl text-white">
     </div>
     <img id="image" :src="`/${user.username}/circle.png?bg=${background}`" @load="loading = false" />
   </div>

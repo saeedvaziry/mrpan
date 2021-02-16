@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 684 684">
+    <defs>
+        <style>
+            .a{stroke:#fff}
+            .a,.b,.c{fill:#b1e4fc;stroke:#b1e4fc;stroke-miterlimit:10;transform-origin:center}
+            .b,.c{fill:none;stroke-width:4px;}
+            .c{stroke-dasharray:6.76471 6.76471;}
+            .a,.b,.c{
+            animation:flash 2s ease-in-out infinite;
+            }
+            @keyframes flash{
+            0%{
+            opacity:0.2;
+            transform:scale(1);
+            }
+            50%{
+            opacity:1;
+            transform:scale(0.95);
+            }
+            100%{
+            opacity:0.2;
+            transform:scale(1);
+            }
+            }
+        </style>
+    </defs>
+    <circle class="a" cx="144.5" cy="144.5" r="60"/>
+    <circle class="a" cx="341.5" cy="60.5" r="60"/>
+    <circle class="a" cx="543.5" cy="144.5" r="60"/>
+    <circle class="a" cx="623.5" cy="341.5" r="60"/>
+    <circle class="a" cx="540.5" cy="540.5" r="60"/>
+    <circle class="a" cx="340.5" cy="623.5" r="60"/>
+    <circle class="a" cx="141.5" cy="540.5" r="60"/>
+    <circle class="a" cx="60.5" cy="342.5" r="60"/>
+    <line class="b" x1="122" y1="341" x2="125.5" y2="341"/>
+    <line class="c" x1="132.26471" y1="341" x2="237.11765" y2="341"/>
+    <line class="b" x1="240.5" y1="341" x2="244" y2="341"/>
+    <line class="b" x1="185.86649" y1="186.86649" x2="188.34134" y2="189.34137"/>
+    <line class="c" x1="193.12473" y1="194.12473" x2="267.26697" y2="268.26694"/>
+    <line class="b" x1="269.65863" y1="270.65863" x2="272.13354" y2="273.13351"/>
+    <line class="b" x1="442" y1="342" x2="445.5" y2="342"/>
+    <line class="c" x1="452.26471" y1="342" x2="557.11768" y2="342"/>
+    <line class="b" x1="560.5" y1="342" x2="564" y2="342"/>
+    <line class="b" x1="415.86652" y1="274.13351" x2="418.34137" y2="271.65863"/>
+    <line class="c" x1="423.12476" y1="266.87527" x2="497.26697" y2="192.73303"/>
+    <line class="b" x1="499.65863" y1="190.34137" x2="502.13348" y2="187.86649"/>
+    <line class="b" x1="494.63348" y1="503.63354" x2="492.15863" y2="501.15863"/>
+    <line class="c" x1="487.37524" y1="496.37524" x2="413.23303" y2="422.23303"/>
+    <line class="b" x1="410.84137" y1="419.84137" x2="408.36652" y2="417.36646"/>
+    <line class="b" x1="273.63348" y1="416.36652" x2="271.15863" y2="418.84137"/>
+    <line class="c" x1="266.37524" y1="423.62476" x2="192.23303" y2="497.76697"/>
+    <line class="b" x1="189.84137" y1="500.15863" x2="187.36649" y2="502.63348"/>
+    <line class="b" x1="341" y1="243" x2="341" y2="239.5"/>
+    <line class="c" x1="341" y1="232.73529" x2="341" y2="127.88235"/>
+    <line class="b" x1="341" y1="124.5" x2="341" y2="121"/>
+    <circle class="a" cx="343.5" cy="342.5" r="100"/>
+    <line class="b" x1="341" y1="442" x2="341" y2="445.5"/>
+    <line class="c" x1="341" y1="452.26471" x2="341" y2="557.11768"/>
+    <line class="b" x1="341" y1="560.5" x2="341" y2="564"/>
+</svg>

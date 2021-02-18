@@ -2,7 +2,9 @@
   user: window.user,
   loading: false,
   background: '2cb4f1',
+  donateAmount: 5,
   saving: false,
+  shareText: `My Best Friends on Twitter ${url}/${user.username}?bg=2cb4f1`,
   dropdown: false
 }">
   <div class="w-full flex items-center justify-between text-center text-white tracking-wide mb-5 font-bold">
@@ -40,15 +42,23 @@
   <div class="mb-10">
     <p class="mb-3 text-white">Edit background color</p>
     <div class="flex items-center">
-      <a href="javascript:" class="w-6 h-6 rounded-full" :class="{'border-2 border-white': background === '2cb4f1'}" style="background-color: #2cb4f1" @click="background = '2cb4f1'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '111111'}" style="background-color: #111111" @click="background = '111111'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'f9858b'}" style="background-color: #f9858b" @click="background = 'f9858b'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '64d52d'}" style="background-color: #64d52d" @click="background = '64d52d'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'ac85f9'}" style="background-color: #ac85f9" @click="background = 'ac85f9'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'ffdd00'}" style="background-color: #ffdd00" @click="background = 'ffdd00'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === 'c83c4f'}" style="background-color: #c83c4f" @click="background = 'c83c4f'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-2 border-white': background === '606468'}" style="background-color: #606468" @click="background = '606468'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full" :class="{'border-3 border-white': background === '2cb4f1'}" style="background-color: #2cb4f1" @click="background = '2cb4f1'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '111111'}" style="background-color: #111111" @click="background = '111111'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'f9858b'}" style="background-color: #f9858b" @click="background = 'f9858b'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '64d52d'}" style="background-color: #64d52d" @click="background = '64d52d'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ac85f9'}" style="background-color: #ac85f9" @click="background = 'ac85f9'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ffdd00'}" style="background-color: #ffdd00" @click="background = 'ffdd00'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'c83c4f'}" style="background-color: #c83c4f" @click="background = 'c83c4f'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '606468'}" style="background-color: #606468" @click="background = '606468'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
     </div>
+  </div>
+  <hr class="mt-2 mb-12">
+  <div class="text-wrap w-72 mx-auto relative">
+    <textarea
+            id="textA" class="rounded-3xl border-0 p-5 w-full block outline-none h-32 mb-5"
+            x-model="shareText">
+    </textarea>
+    <img id="copyToClipboard-a" src="./img/copy.svg" class="w-4 absolute right-4 top-4 cursor-pointer">
   </div>
   <a id="save-image" @click="saving = true; setTimeout(() => {saving = false;}, 5000)" :href="`/${user.username}/circle.png?bg=${background}`" download class="w-72 h-12 bg-white mx-auto rounded-2xl flex items-center px-4 text-black cursor-pointer mb-5">
     <div class="w-full text-center font-bold">
@@ -56,16 +66,55 @@
       <span x-show="!saving">Save image</span>
     </div>
   </a>
-  <a :href="`http://twitter.com/share?text=My Best Friends on Twitter&url=${url}/${user.username}?bg=${background}&hashtags=MrPan2021`" target="_blank" class="w-72 h-12 bg-primary-600 mx-auto rounded-2xl flex items-center px-4 cursor-pointer text-white">
+  <a :href="`http://twitter.com/share?text=${shareText}&url= &hashtags=MrPan2021`" target="_blank" class="w-72 h-12 bg-primary-600 mx-auto rounded-2xl flex items-center px-4 cursor-pointer text-white">
     <fa-icon :icon="['fab', 'twitter']" class="text-xl absolute"></fa-icon>
     <div class="w-full text-center font-bold">Share on Twitter</div>
   </a>
+  <h2 class="my-12 text-2xl text-white text-center px-4 capitalize leading-relaxed">
+    Use #mrpan2021 on your tweet to find new friends
+  </h2>
+  <h2 class="text-white text-center font-bold text-xl">Do you like Mr.Pan? </h2>
+  <div class="border-3 border-white p-6 rounded-xl">
+    <div class="flex items-center justify-center">
+      <img class="w-16 h-16 rounded-full border-2 border-primary-100 mr-3" :src="user.avatar" alt="">
+      <div class="text-white">
+        <h2 class="mb-0 font-bold" x-text="user.name"></h2>
+        <h2 class="mb-0" x-text="`@${user.username}`"></h2>
+      </div>
+    </div>
+    <img src="./img/donate/mrpandream.svg" alt="" class="w-48 mt-6 mx-auto">
+    <div class="flex md:-mx-4 -mx-2 mt-4">
+      <div class="w-1/4 md:mx-4 mx-2 rounded-xl cursor-pointer" @click="donateAmount=5" :class="{'bg-gray-500' : parseInt(donateAmount) === 5,'bg-white' : parseInt(donateAmount) !== 5}">
+        <img src="./img/donate/1fish.svg" alt="" class="w-full">
+      </div>
+      <div class="w-1/4 md:mx-4 mx-2 rounded-xl cursor-pointer" @click="donateAmount=15" :class="{'bg-gray-500' : parseInt(donateAmount) === 15,'bg-white' : parseInt(donateAmount) !== 15}">
+        <img src="./img/donate/3fish.svg" alt="" class="w-full">
+      </div>
+      <div class="w-1/4 md:mx-4 mx-2 rounded-xl cursor-pointer" @click="donateAmount=25" :class="{'bg-gray-500' : parseInt(donateAmount) === 25,'bg-white' : parseInt(donateAmount) !== 25}">
+        <img src="./img/donate/5fish.svg" alt="" class="w-full">
+      </div>
+      <div class="w-1/4 md:mx-4 mx-2 bg-white rounded-xl overflow-hidden">
+        <input x-model="donateAmount" class="w-full h-full text-center text-2xl">
+      </div>
+    </div>
+    <a href="#" target="_blank" class="w-72 h-12 mt-4 bg-yellow-500 mx-auto rounded-2xl flex items-center px-4 cursor-pointer text-white">
+      <div class="w-full text-center font-bold" x-text="`Support $${donateAmount}`"></div>
+    </a>
+    <div class="text-center mt-4">
+      <a href="/donors-list" class="underline text-primary-900">2 people support Mr.Pan</a>
+    </div>
+  </div>
 </div>
 <script>
   function changeColor(color) {
     this.background = color;
     this.loading = true;
   }
+  document.getElementById('copyToClipboard-a').addEventListener('click', function() {
+    var text = document.getElementById('textA');
+    text.select();
+    document.execCommand('copy');
+  })
   function logout() {
     window.location.href = '/auth/logout';
   }

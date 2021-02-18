@@ -24,9 +24,47 @@ export class AppController {
     };
   }
 
+  @Get('/donors-list')
+  @Render('donors')
+  donors(@Req() req: Request) {
+    return {
+      title: process.env.APP_NAME,
+      user: req.user,
+      donors: JSON.stringify([
+        {
+          avatar : 'https://pbs.twimg.com/profile_images/1334251286292787201/U8OJ_Jcb_400x400.jpg',
+          name: 'saeed Vaziri',
+          username: 'saeedVaziri',
+          amount: 500,
+        },
+        {
+          avatar : 'https://pbs.twimg.com/profile_images/1334251286292787201/U8OJ_Jcb_400x400.jpg',
+          name: 'saeed Vaziri',
+          username: '222',
+          amount: 50,
+        },
+        {
+          avatar : 'https://pbs.twimg.com/profile_images/1334251286292787201/U8OJ_Jcb_400x400.jpg',
+          name: 'saeed Vaziri',
+          username: '123',
+          amount: 1,
+        }
+      ]),
+    };
+  }
+
   @Get('/privacy')
   @Render('privacy')
   privacy(@Req() req: Request) {
+    return {
+      title: process.env.APP_NAME,
+      user: req.user,
+    };
+  }
+
+  @Get('/about')
+  @Render('about')
+  about(@Req() req: Request) {
     return {
       title: process.env.APP_NAME,
       user: req.user,

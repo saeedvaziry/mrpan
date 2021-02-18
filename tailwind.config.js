@@ -18,7 +18,10 @@ module.exports = {
           '800': '#0874A6',
           '900': '#065275'
         },
-      }
+      },
+      borderWidth: {
+        '3': '3px',
+      },
     },
     rotate: {
       '-30': '-30deg',
@@ -68,7 +71,7 @@ module.exports = {
       '315': '315deg',
       '324': '324deg',
       '330': '330deg',
-    }
+    },
   },
   variants: {
     extend: {},

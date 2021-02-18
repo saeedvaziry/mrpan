@@ -1,0 +1,56 @@
+<div x-data="{
+  user: window.user,
+  dropdown: false,
+  donors: {{donors}},
+}">
+  <div class="w-full flex items-center justify-between text-center text-white tracking-wide mb-5 font-bold">
+    <a href="./home" class="text-4xl">←</a>
+    <div>
+      <div @click="dropdown = !dropdown" class="z-0 cursor-pointer">
+        <template x-if="user.avatar">
+          <img class="w-12 h-12 rounded-full border-2 border-primary-100" :src="user.avatar" alt="" />
+        </template>
+        <template x-if="!user.avatar">
+          <div class="w-12 h-12 text-sm md:text-md rounded-full inline-flex items-center justify-center bg-primary-200 text-primary-600 border-4 border-primary-100 capitalize">
+            <span x-text="user.name.charAt(0)"></span>
+          </div>
+        </template>
+      </div>
+      <div class="relative">
+        <transition enter-active-class="transition ease-out duration-100 transform" enter-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100" leave-active-class="transition ease-in duration-75 transform" leave-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
+          <div x-show="dropdown" @click.away="dropdown = false" class="origin-top-right right-0 absolute mt-2 w-48 min-w-full rounded-md shadow-lg z-10">
+            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="dropdown">
+              <div @click="logout()" :class="['block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer']" role="menuitem">
+                logout
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
+  </div>
+  <div>
+    <template x-for="donor of donors" :key="donor.username">
+      <div class="flex justify-between items-center mb-8">
+        <div class="flex items-center justify-center">
+          <img class="w-16 h-16 rounded-full border-2 border-primary-100 mr-3" :src="donor.avatar" alt="">
+          <div class="text-white text-sm flex items-center">
+            <div class="flex-shrink-0">
+              <h2 class="mb-0 font-bold" x-text="donor.name"></h2>
+              <h2 class="mb-0" x-text="`@${donor.username}`"></h2>
+            </div>
+            <a href="#" x-show="user.username === donor.username" class="border border-white rounded-xl w-24 ml-4 p-1 text-center">
+              Do not show my name
+            </a>
+          </div>
+        </div>
+        <div class="font-bold text-white text-2xl" x-text="`$${donor.amount}`"></div>
+      </div>
+    </template>
+  </div>
+</div>
+<script>
+  function logout() {
+    window.location.href = '/auth/logout';
+  }
+</script>

@@ -6,7 +6,7 @@
   saving: false,
   shareText: `My Best Friends on Twitter ${url}/${user.username}?bg=2cb4f1`,
   dropdown: false
-}">
+}" x-init="$watch('background', value => {shareText = shareText.replace(/bg=[\w]{6}/g,`bg=${value}`)})">
   <div class="w-full flex items-center justify-between text-center text-white tracking-wide mb-5 font-bold">
     <div class="text-2xl">Mr. Pan</div>
     <div>
@@ -33,23 +33,23 @@
       </div>
     </div>
   </div>
-  <div class="mb-3 md:mb-5 relative" style="height: 506px">
+  <div class="mb-3 md:mb-5 relative">
     <div x-show="loading" class="absolute left-0 right-0 top-0 bottom-0 z-50 flex items-center justify-center h-full">
-      <img src="./img/loading.svg" class="text-2xl text-white">
+      <img src="./img/loading.svg" class="text-2xl text-white w-8/12 mx-auto mt-8">
     </div>
-    <img id="image" :src="`/${user.username}/circle.png?bg=${background}`" @load="loading = false" />
+    <img id="image" :class="{'opacity-0' : loading}" :src="`/${user.username}/circle.png?bg=${background}`" @load="loading = false" />
   </div>
   <div class="mb-10">
     <p class="mb-3 text-white">Edit background color</p>
-    <div class="flex items-center">
-      <a href="javascript:" class="w-6 h-6 rounded-full" :class="{'border-3 border-white': background === '2cb4f1'}" style="background-color: #2cb4f1" @click="background = '2cb4f1'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '111111'}" style="background-color: #111111" @click="background = '111111'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'f9858b'}" style="background-color: #f9858b" @click="background = 'f9858b'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '64d52d'}" style="background-color: #64d52d" @click="background = '64d52d'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ac85f9'}" style="background-color: #ac85f9" @click="background = 'ac85f9'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ffdd00'}" style="background-color: #ffdd00" @click="background = 'ffdd00'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'c83c4f'}" style="background-color: #c83c4f" @click="background = 'c83c4f'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
-      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '606468'}" style="background-color: #606468" @click="background = '606468'; loading = true; setTimeout(() => {loading = false;}, 3000)"></a>
+    <div class="flex items-center" id="backgrounds">
+      <a href="javascript:" class="w-6 h-6 rounded-full" :class="{'border-3 border-white': background === '2cb4f1'}" style="background-color: #2cb4f1" @click="background = '2cb4f1'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '111111'}" style="background-color: #111111" @click="background = '111111'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'f9858b'}" style="background-color: #f9858b" @click="background = 'f9858b'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '64d52d'}" style="background-color: #64d52d" @click="background = '64d52d'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ac85f9'}" style="background-color: #ac85f9" @click="background = 'ac85f9'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'ffdd00'}" style="background-color: #ffdd00" @click="background = 'ffdd00'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === 'c83c4f'}" style="background-color: #c83c4f" @click="background = 'c83c4f'; loading = true;"></a>
+      <a href="javascript:" class="w-6 h-6 rounded-full ml-2" :class="{'border-3 border-white': background === '606468'}" style="background-color: #606468" @click="background = '606468'; loading = true;"></a>
     </div>
   </div>
   <hr class="mt-2 mb-12">
@@ -106,15 +106,11 @@
   </div>
 </div>
 <script>
-  function changeColor(color) {
-    this.background = color;
-    this.loading = true;
-  }
   document.getElementById('copyToClipboard-a').addEventListener('click', function() {
     var text = document.getElementById('textA');
     text.select();
     document.execCommand('copy');
-  })
+  });
   function logout() {
     window.location.href = '/auth/logout';
   }
